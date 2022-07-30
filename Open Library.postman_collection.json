@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "8791e383-dafc-4c7c-bc0a-18032142ceb8",
+		"name": "Open Library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/search/authors.json?q=andy%20weir",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"search",
+						"authors.json"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "andy%20weir"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Works by Author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/authors/OL7234434A/works.json",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"authors",
+						"OL7234434A",
+						"works.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/books/OL17091839W.json",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"books",
+						"OL17091839W.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Work",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/works/OL45883W/Fantastic_Mr._FOX",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"works",
+						"OL45883W",
+						"Fantastic_Mr._FOX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Work JSON",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/works/OL45883W.json",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"works",
+						"OL45883W.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
