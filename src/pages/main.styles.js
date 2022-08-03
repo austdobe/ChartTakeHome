@@ -2,22 +2,28 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div ` 
     text-align: center;
-    display: flex;
-    grid-template-columns: auto;
-    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px 20px;
+    text-align: center;
 
 `
 
 export const Form = styled.form ` 
-    display:flex;
-    width: 25%;
-    margin: 20px 10px;
-    padding-bottom: 20px;
+    display: flex;
+    width: 100%;
+    margin: 10px auto;
+    align-items: center;
+    justify-items: center;
+
+    input {
+        height:50%;
+    }
     .icon{
         position: relative;
-        right:60px;
+        right:50px;
         top:0;
-        font-size: 30px;
+        font-size: 25px;
         transform: rotateZ(90deg);
     }
     .Arrow {
@@ -46,5 +52,19 @@ export const NumberInput = styled.input `
         margin: 0;
     }
     
+
+`
+
+export const CheckboxInput = styled.input` 
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 10px;
+    
+    .isActive {
+        background-color: blue;
+    }
 
 `
