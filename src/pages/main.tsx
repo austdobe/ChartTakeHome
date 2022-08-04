@@ -152,7 +152,7 @@ const MainPage = () => {
                     <h3>Include Best Seller</h3>
                 </Form>
             </FormWrapper>
-            <Content>
+            <Content data-testid="chart-container">
                 <Chart 
                     firstAuth={firstAuthName}
                     FirstWork={FirstSelectedWork.work} 
