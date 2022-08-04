@@ -62,7 +62,6 @@ const Chart = (props:ISelectedWork) => {
         }
     }
     useMemo(() => {
-        console.log("done")
         firstBestData = props.FirstWork
         secondBestData = props.SecondWork
         handleProps();
