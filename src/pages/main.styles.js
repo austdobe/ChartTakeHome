@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div ` 
+export const FormWrapper = styled.div ` 
     text-align: center;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -14,7 +14,7 @@ export const Wrapper = styled.div `
 
 `
 
-export const Title = styled.div ` 
+export const Wrapper = styled.div ` 
     text-align: center;
     font-size: 30px;
     background-color: #f3f6f4;

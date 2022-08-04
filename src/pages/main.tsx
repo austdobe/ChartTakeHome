@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useState } from "react";
 import Chart from "../components/chart";
-import { Wrapper, Title, Form, FormInput, NumberInput, Checkbox, Content } from "./main.styles";
+import { Wrapper, FormWrapper, Form, FormInput, NumberInput, Checkbox, Content } from "./main.styles";
 
 
 const search = 'https://openlibrary.org/search/authors.json?q='
@@ -91,16 +91,16 @@ const MainPage = () => {
         .catch(e => console.log(e))
     }
     return (
-        <Title>Author Revision Head to Head
-            <Wrapper>
+        <Wrapper data-testid="greetings-container">Author Revision Head to Head
+            <FormWrapper>
                 <Form  onSubmit={handleFirstAuthor} >
-                    <FormInput placeholder={firstAuthName} onChange={handleFirstName} />
+                    <FormInput data-testid="firstAuth" value={firstAuthName} placeholder="First Author" onChange={handleFirstName} />
                     <div className="icon">
                         <FontAwesomeIcon icon={solid('magnifying-glass')} />
                     </div>
                 </Form>
                 <Form  onSubmit={handleSecondAuthor} >
-                    <FormInput placeholder={secondAuthName} onChange={handleSecondName} />
+                    <FormInput placeholder="Second Author" onChange={handleSecondName} />
                     <div className="icon">
                         <FontAwesomeIcon icon={solid('magnifying-glass')} />
                     </div>
@@ -119,7 +119,7 @@ const MainPage = () => {
                     <Checkbox onClick={handleSeller}><div style={{background: isActive ? "radial-gradient(#bdbdbd, #eeeeee)" : ''}}></div></Checkbox>
                     <h3>Include Best Seller</h3>
                 </Form>
-            </Wrapper>
+            </FormWrapper>
             <Content>
                 <Chart 
                     firstAuth={firstAuthName}
@@ -132,7 +132,7 @@ const MainPage = () => {
                     included={isIncluded}
                 />
             </Content>
-        </ Title>
+        </ Wrapper>
     )
 
 }

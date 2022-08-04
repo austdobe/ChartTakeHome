@@ -9,7 +9,7 @@ Chart.register(...registerables);
 
 export function App(): JSX.Element {
   return (
-        <div data-testid="greetings-container">
+        <div>
           <MainPage />
         </div>
         
