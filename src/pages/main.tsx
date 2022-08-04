@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useState } from "react";
-import Chart from "../components/chart";
+import Chart from "../components/Chart";
 import { Wrapper, FormWrapper, Form, FormInput, NumberInput, Checkbox, Content } from "./main.styles";
 
-
-const search = 'https://openlibrary.org/search/authors.json?q='
+import { search } from "../util/utils";
+import Alert from "../components/Alert";
+import { setTimeout } from "timers";
+import { faSpaghettiMonsterFlying } from "@fortawesome/free-solid-svg-icons";
 
 export interface ISelectedWork {
     work: Array<object>
@@ -16,22 +18,37 @@ const selectedWork: ISelectedWork = {
 }
 
 const MainPage = () => {
+
     const [ FirstSelectedWork, SetFirstSelectedWork ] = useState(selectedWork)
     const [ SecondSelectedWork, SetSecondSelectedWork ] = useState(selectedWork)
-    const [ firstAuthName, setFirstAuthName ] = useState('First Author')
-    const [ secondAuthName, setSecondAuthName ] = useState('Second Author')
+    const [ firstAuthName, setFirstAuthName ] = useState('')
+    const [ secondAuthName, setSecondAuthName ] = useState('')
     const [ TitleWorks, setTitleWorks ] = useState(4)
     const [ firstBestSeller, setFirstBestSeller ] = useState('')
     const [ secondBestSeller, setSecondBestSeller ] = useState('')
     const [ isIncluded, setIsIncluded ] = useState(true)
     const [ isActive, setIsActive ] = useState(true)
+    const [ isError, setIsError ] = useState(false)
+
     const handleFirstName = (event:any) => {
         event.preventDefault()
-        setFirstAuthName(event.target.value)
+        const reg = /[a-z]/gi
+        if(reg.test(event.target.value)) {
+            setFirstAuthName(event.target.value)
+        }
+        else if(event.target.value === ''){
+            setFirstAuthName(event.target.value)
+        }
     }
     const handleSecondName = (event:any) => {
         event.preventDefault()
-        setSecondAuthName(event.target.value)
+        const reg = /[a-z]/gi
+        if(reg.test(event.target.value)) {
+            setSecondAuthName(event.target.value)
+        }
+        else if(event.target.value === ''){
+            setSecondAuthName(event.target.value)
+        }
     }
     const handleSeller = (event:any) => {
         event.preventDefault()
@@ -67,15 +84,28 @@ const MainPage = () => {
                 SetSecondSelectedWork({work:data.entries})
             }
         })
+        .catch((e)=>{
+            console.log(e)
+        })
 
     }
     const handleFirstAuthor = (event:any) => {
         event.preventDefault()
         fetch(`${search}${firstAuthName}`)
-        .then((response) => response.json())
+        .then((response) => {
+            if(response.ok) {
+                return response.json()
+            }
+            
+        })
         .then((data) => {
-            setFirstBestSeller(data.docs[0].top_work)
-            getAuthorWork(data.docs[0].key, "First")
+            if(data.numFound <= 0){
+                setIsError(true)
+                setTimeout(() => setIsError(false), 3000)
+            }
+                setFirstAuthName(data.docs[0].name)
+                setFirstBestSeller(data.docs[0].top_work)
+                getAuthorWork(data.docs[0].key, "First")
         })
         .catch(e => console.log(e))
         
@@ -85,6 +115,7 @@ const MainPage = () => {
         fetch(`${search}${secondAuthName}`)
         .then((response) => response.json())
         .then((data)=> {
+            setSecondAuthName(data.docs[0].name)
             setSecondBestSeller(data.docs[0].top_work)
             getAuthorWork(data.docs[0].key, "Second")
         })
@@ -92,17 +123,18 @@ const MainPage = () => {
     }
     return (
         <Wrapper data-testid="greetings-container">Author Revision Head to Head
+            <Alert isError={isError} timer={100}/>
             <FormWrapper>
-                <Form  onSubmit={handleFirstAuthor} >
-                    <FormInput data-testid="firstAuth" value={firstAuthName} placeholder="First Author" onChange={handleFirstName} />
+                <Form  onSubmit={handleFirstAuthor} data-testid="firstAuth">
+                    <FormInput  value={firstAuthName} placeholder="First Author" onChange={handleFirstName} />
                     <div className="icon">
-                        <FontAwesomeIcon icon={solid('magnifying-glass')} />
+                        <FontAwesomeIcon icon={solid('magnifying-glass')} onClick={handleFirstAuthor}/>
                     </div>
                 </Form>
-                <Form  onSubmit={handleSecondAuthor} >
-                    <FormInput placeholder="Second Author" onChange={handleSecondName} />
+                <Form  onSubmit={handleSecondAuthor} data-testid="secondAuth" >
+                    <FormInput data-testid="secondAuth" value={secondAuthName} placeholder="Second Author" onChange={handleSecondName} />
                     <div className="icon">
-                        <FontAwesomeIcon icon={solid('magnifying-glass')} />
+                        <FontAwesomeIcon icon={solid('magnifying-glass')} onClick={handleSecondAuthor}/>
                     </div>
                 </Form>
                 <Form>

@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
-import { Line, Chart as ChartJS } from "react-chartjs-2";
+import { useMemo } from "react";
+import { Line } from "react-chartjs-2";
 import { Wrapper } from "./chart.styles";
 
 
@@ -10,28 +10,9 @@ export interface ISelectedWork {
     secondAuth: string
     SecondWork: Array<object>
     secondBest?: string
-    Titles:any
+    Titles:number
     included: boolean
 }
-
-export interface IState {
-    id: number,
-    label: string,
-    data: Array<Object>,
-    borderColor: string,
-    backgroundColor: string,
-}
-
-const initialState ={
-        
-    id: 1,
-    label: " Revisions ",
-    data: [],
-    borderColor: 'rgb(255, 99, 132)',
-    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        
-}
-
 
 const Chart = (props:ISelectedWork) => {
     let firstBestData = props.FirstWork

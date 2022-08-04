@@ -1,0 +1,1 @@
+export const search = 'https://openlibrary.org/search/authors.json?q='

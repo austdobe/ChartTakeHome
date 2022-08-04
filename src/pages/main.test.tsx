@@ -1,12 +1,20 @@
 import { shallow } from 'enzyme';
 import  MainPage  from './main';
-import { getByText, render, fireEvent } from '@testing-library/react';
 
 describe('App', () => {
+  let wrapper:any = ''; 
+
+    beforeEach(() => {
+      wrapper = shallow(<MainPage />);
+    });
     describe('using enzyme', () => {
+      it("renders without crashing", ()=>{
+        expect(wrapper.exists()).toBe(true)
+      })
+
       it('returns the text', () => {
-        const component = shallow(<MainPage />);
-        expect(component.find('[data-testid="greetings-container"]').text()).toContain(
+        
+        expect(wrapper.find('[data-testid="greetings-container"]').text()).toContain(
           'Author Revision Head to Head'
         );
       });
