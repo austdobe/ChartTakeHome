@@ -3,9 +3,21 @@ import styled from 'styled-components'
 export const Wrapper = styled.div ` 
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 10px 20px;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-flow: row dense;
+    justify-content: space-evenly;
     text-align: center;
+    gap: 5px;
+    background-color: white;
+    font-size: 18px;
+    margin-top: 20px;;
+
+`
+
+export const Title = styled.div ` 
+    text-align: center;
+    font-size: 30px;
+    background-color: #f3f6f4;
 
 `
 
@@ -15,22 +27,27 @@ export const Form = styled.form `
     margin: 10px auto;
     align-items: center;
     justify-items: center;
+    h3{
+        margin-left: 20px;
+    }
 
     input {
         height:50%;
+        font-size: 18px;
+        border: solid 1px #bcbcbc;
+        box-shadow: 1px 1px 5px 0 #bcbcbc;
     }
     .icon{
         position: relative;
-        right:50px;
+        right:30px;
         top:0;
-        font-size: 25px;
+        font-size: 20px;
         transform: rotateZ(90deg);
     }
     .Arrow {
         align-self: center;
         justify-self: center;
         margin:0 10px;
-        font-size: 30px;
     }
     button{
         border:none;
@@ -44,27 +61,36 @@ export const FormInput = styled.input `
     border-radius: 5px;
 `
 export const NumberInput = styled.input ` 
-    width: 60%;
+    width: 30%;
     text-align: center;
     ::-webkit-outer-spin-button,
     ::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
-    
 
 `
 
-export const CheckboxInput = styled.input` 
-    width: 50px;
-    height: 50px;
-    border: 1px solid gray;
+export const Checkbox = styled.div` 
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
     text-align: center;
     margin-left: 20px;
     margin-right: 10px;
-    
-    .isActive {
-        background-color: blue;
+    box-shadow: 0 0 0 2px #bcbcbc;
+    padding: 1px;
+
+    div{
+        height: 100%;
+        width: 100%;
+        border: none;
     }
+
+`
+
+export const Content = styled.div ` 
+    width: 100%;
+    height: 100%;
 
 `

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useState } from "react";
 import Chart from "../components/chart";
-import { Wrapper, Form, FormInput, NumberInput, CheckboxInput } from "./main.styles";
+import { Wrapper, Title, Form, FormInput, NumberInput, Checkbox, Content } from "./main.styles";
 
 
 const search = 'https://openlibrary.org/search/authors.json?q='
@@ -20,26 +20,23 @@ const MainPage = () => {
     const [ SecondSelectedWork, SetSecondSelectedWork ] = useState(selectedWork)
     const [ firstAuthName, setFirstAuthName ] = useState('First Author')
     const [ secondAuthName, setSecondAuthName ] = useState('Second Author')
-    const [ TitleWorks, setTitleWorks ] = useState(1)
+    const [ TitleWorks, setTitleWorks ] = useState(4)
     const [ firstBestSeller, setFirstBestSeller ] = useState('')
     const [ secondBestSeller, setSecondBestSeller ] = useState('')
-    const [ isIncluded, setIsIncluded ] = useState(false)
-    const [ isActive, setIsActive ] = useState(false)
+    const [ isIncluded, setIsIncluded ] = useState(true)
+    const [ isActive, setIsActive ] = useState(true)
     const handleFirstName = (event:any) => {
+        event.preventDefault()
         setFirstAuthName(event.target.value)
     }
     const handleSecondName = (event:any) => {
+        event.preventDefault()
         setSecondAuthName(event.target.value)
     }
     const handleSeller = (event:any) => {
         event.preventDefault()
         const Best = isIncluded
-        if(Best){
-            setIsActive(true)
-        }
-        else{
-            setIsActive(false)
-        }
+        setIsActive(!isActive)
         setIsIncluded(!Best)
     }
     const setWorks = (event:any) => {
@@ -94,7 +91,7 @@ const MainPage = () => {
         .catch(e => console.log(e))
     }
     return (
-        <>
+        <Title>Author Revision Head to Head
             <Wrapper>
                 <Form  onSubmit={handleFirstAuthor} >
                     <FormInput placeholder={firstAuthName} onChange={handleFirstName} />
@@ -119,21 +116,23 @@ const MainPage = () => {
                     <h3>Number of Works</h3>
                 </Form>
                 <Form>
-                    <CheckboxInput type="checkbox" className={`${isActive && "isActive"}`} onChange={handleSeller} />
-                    <h3>include Best Seller</h3>
+                    <Checkbox onClick={handleSeller}><div style={{background: isActive ? "radial-gradient(#bdbdbd, #eeeeee)" : ''}}></div></Checkbox>
+                    <h3>Include Best Seller</h3>
                 </Form>
             </Wrapper>
-            <Chart 
-                // firstAuth={firstAuthName}
-                FirstWork={FirstSelectedWork.work} 
-                firstBest={firstBestSeller}
-                // secondAuth={secondAuthName}
-                SecondWork={SecondSelectedWork.work}
-                secondBest={secondBestSeller} 
-                Titles={TitleWorks} 
-                included={isIncluded}
-            />
-        </>
+            <Content>
+                <Chart 
+                    firstAuth={firstAuthName}
+                    FirstWork={FirstSelectedWork.work} 
+                    firstBest={firstBestSeller}
+                    secondAuth={secondAuthName}
+                    SecondWork={SecondSelectedWork.work}
+                    secondBest={secondBestSeller} 
+                    Titles={TitleWorks} 
+                    included={isIncluded}
+                />
+            </Content>
+        </ Title>
     )
 
 }
